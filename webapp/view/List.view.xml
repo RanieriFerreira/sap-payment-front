@@ -1,0 +1,111 @@
+<mvc:View controllerName="sap.btp.sapui5.controller.List" xmlns:ndc="sap.ndc" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" displayBlock="true" class="sapUiBodyBackground sapContrastPlus sapContrast">
+
+		<NotificationList id="_IDGenNotificationList1">
+			<layoutData>
+				<FlexItemData id="_IDGenFlexItemData1" maxWidth="600px" />
+			</layoutData>
+
+			<NotificationListGroup id="_IDGenNotificationListGroup1"
+				title="Recomendação de Aprovação Automática de Pagamento"
+				showCloseButton="true"
+                collapsed="true"
+				close=".onItemClose">
+                    <buttons>
+						<Button id="_IDGenButton1" text="Accept All" press=".onAcceptPress" />
+						<Button id="_IDGenButton8" text="Reject All" press=".onRejectPress" />
+					</buttons>
+
+				<NotificationListItem id="_IDGenNotificationListItem1"
+					title="New order (#2523)"
+					description="RG Telecomunicações Ltda - 40.856.987/0001-65"
+					showCloseButton="true"
+					datetime="R$ 15.000,00"
+					unread="true"
+					priority="Medium"
+					close=".onItemClose"
+					press=".onListItemPress">
+					<!--authorInitials="SF"
+					authorAvatarColor="Random"-->
+					<buttons>
+						<Button id="_IDGenButton2" text="Accept" press=".onAcceptPress" />
+						<Button id="_IDGenButton3" text="Reject" press=".onRejectPress" />
+					</buttons>
+				</NotificationListItem>
+
+				<NotificationListItem id="_IDGenNotificationListItem2"
+					title="New order (#2524)"
+					description="BA Limpeza ME - 10.022.090/0001-75"
+					showCloseButton="true"
+					datetime="R$ 8.000,00"
+					unread="true"
+					priority="Medium"
+					close=".onItemClose"
+					press=".onListItemPress">
+					<!--authorInitials="SF"
+					authorAvatarColor="Random"-->
+					<buttons>
+						<Button id="_IDGenButton4" text="Accept" press=".onAcceptPress" />
+						<Button id="_IDGenButton5" text="Reject" press=".onRejectPress" />
+					</buttons>
+				</NotificationListItem>
+
+				<NotificationListItem id="_IDGenNotificationListItem3"
+					title="New order (#2525)"
+					description="Stefany e Luiza Financeira Ltda - 66.072.239/0001-85"
+					showCloseButton="true"
+					datetime="R$ 1.000,00"
+					unread="true"
+					priority="Medium"
+					close=".onItemClose"
+					press=".onListItemPress">
+					<!--authorInitials="SF"
+					authorAvatarColor="Random"-->
+					<buttons>
+						<Button id="_IDGenButton6" text="Accept" press=".onAcceptPress" />
+						<Button id="_IDGenButton7" text="Reject" press=".onRejectPress" />
+					</buttons>
+				</NotificationListItem>
+
+			</NotificationListGroup>
+
+		</NotificationList>
+
+<VBox id="_IDGenVBox1" class="sapUiSmallMargin">
+
+	<Title id="_IDGenTitle1" level="H3" text="Add Payment" />	   
+
+	<ndc:BarcodeScannerButton
+		id="sampleBarcodeScannerButton"
+		scanSuccess="onScanSuccess"
+		scanFail="onScanError"
+		inputLiveUpdate="onScanLiveupdate"
+		dialogTitle="Barcode Scanner Button"
+	/>
+	<HBox id="_IDGenHBox1" class="sapUiTinyMarginTop">
+		<Label id="_IDGenLabel2" text="Scan Result:"/>
+		<Text id="sampleBarcodeScannerResult" text="" class="sapUiTinyMarginBegin"/>
+	</HBox>
+</VBox>
+  
+  <Page id="listPage" title="{i18n>ListTitle}" >
+        <subHeader>
+			<Bar id="_IDGenBar1">
+				<contentLeft>
+					<SearchField id="_IDGenSearchField1" search="handleSearch"/>
+				</contentLeft>
+			</Bar>
+		</subHeader>
+
+		<List id="list" items="{/Products}">
+			<ObjectListItem id="_IDGenObjectListItem1" type="Navigation" press="handleListItemPress" title="{ProductName}" number="{= ((${UnitPrice} * 100) / 100).toFixed(2) }" numberUnit="{i18n>Currency}">
+				<attributes>
+					<ObjectAttribute id="_IDGenObjectAttribute1" text="{QuantityPerUnit}"/>
+				</attributes>
+				<firstStatus>
+					<ObjectStatus id="_IDGenObjectStatus1" text="{= ${Discontinued} ? ${i18n>Discontinued} : ${i18n>Available} }" state="{= ${Discontinued}? 'Error' : 'Success' }"/>
+				</firstStatus>
+			</ObjectListItem>
+		</List>
+
+    </Page>
+</mvc:View>
